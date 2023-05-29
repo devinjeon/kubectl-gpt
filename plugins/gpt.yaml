@@ -1,0 +1,52 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: gpt
+spec:
+  version: v1.0.0
+  platforms:
+    - bin: kubectl-gpt.exe
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_windows_x86_64.zip
+      sha256: aa6930527d24e6a3044a03d89a3b1921f0b55c0d3e31839650d38dc7d22eb221
+      selector:
+        matchLabels:
+          os: windows
+          arch: amd64
+    - bin: kubectl-gpt.exe
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_windows_arm64.zip
+      sha256: edb21818be2368f34c055709bff3330bef86d93b349af460b17fc6d6470539f1
+      selector:
+        matchLabels:
+          os: windows
+          arch: arm64
+    - bin: kubectl-gpt
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_linux_x86_64.tar.gz
+      sha256: dc5e31f655a71d469495b4d69f4c35a76b4c325b41af27c0fd325ead21d23e20
+      selector:
+        matchLabels:
+          os: linux
+          arch: amd64
+    - bin: kubectl-gpt
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_linux_arm64.tar.gz
+      sha256: 83c56b09980d5c98ac346a7d2c091b647fc0e115710c6053011ee86e0916a7c5
+      selector:
+        matchLabels:
+          os: linux
+          arch: arm64
+    - bin: kubectl-gpt
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_darwin_x86_64.tar.gz
+      sha256: da542a7ec6a3317a4eb926b42f4ab1aced97c286a1df8d62b696e13740e04f41
+      selector:
+        matchLabels:
+          os: darwin
+          arch: amd64
+    - bin: kubectl-gpt
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_darwin_arm64.tar.gz
+      sha256: 0a62a346f5128b5b89fd0438bdbaea6097febfe8dd1069b2b2f457bc2d157cdc
+      selector:
+        matchLabels:
+          os: darwin
+          arch: arm64
+  shortDescription: Generate kubectl command using OpenAI GPT model.
+  homepage: https://github.com/devinjeon/kubectl-gpt
+  description: kubectl-gpt is a kubectl plugin to generate `kubectl` commands from natural language input by using OpenAI's GPT model.
