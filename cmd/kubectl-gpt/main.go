@@ -55,6 +55,12 @@ func main() {
 	}
 
 	query := strings.Join(flag.Args(), " ")
+	query = strings.TrimSpace(query)
+	if query == "" {
+		fmt.Println("Please input a query.")
+		fmt.Println("Usage: kubectl-gpt [OPTIONS] QUERY")
+		os.Exit(1)
+	}
 	request := gpt.NewOpenAIRequest(model, temperature, maxTokens, systemMessage, query)
 
 	wg := sync.WaitGroup{}
