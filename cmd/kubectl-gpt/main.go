@@ -77,14 +77,16 @@ func main() {
 	}
 
 	kubectlCommand := extractCommand(response)
-	fmt.Printf("\033[1;34m* Generated Command\033[0m\n%s\n", kubectlCommand)
+	fmt.Println("\033[1;31m❗[WARNING] Please verify the generated commands before executing them on your k8s cluster,",
+		"especially `update` and `patch` commands, as GPT-generated commands may be inaccurate.\033[0m")
+	fmt.Printf("\033[1;34m[Generated Command]\033[0m\n%s\n", kubectlCommand)
 
 	if *noFlag {
 		os.Exit(0)
 	}
 	if !*yesFlag {
 		reader := bufio.NewReader(os.Stdin)
-		fmt.Print("\033[1;34m* Execute the command?\033[0m [y/N]: ")
+		fmt.Print("\033[1;34m⎈ Do you really want to execute this command?\033[0m [y/N]: ")
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
 

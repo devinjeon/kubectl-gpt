@@ -5,6 +5,9 @@
 
 Kubectl-GPT is a kubectl plugin to generate `kubectl` commands from natural language input by using GPT model.
 
+| ❗[WARNING] Please verify the generated commands before executing them on your k8s cluster, especially `update` and `patch` commands, as GPT-generated commands may be inaccurate. |
+|-|
+
 ![demo](demo.gif)
 
 ## Installation
