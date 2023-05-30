@@ -141,13 +141,20 @@ func printLoadingMessage(wg *sync.WaitGroup) {
 	loading := "Getting kubectl command from GPT API "
 	i := 0
 
-	loadingTicker := time.NewTicker(time.Second)
+	loadingSymbol := "🚶"
+
+	loadingTicker := time.NewTicker(time.Millisecond * 500)
 
 	go func() {
 		for {
 			select {
 			case <-loadingTicker.C:
-				fmt.Printf("\033[2K\r%s%s", loading, strings.Repeat(".", i%30))
+				if i%2 == 0 {
+					loadingSymbol = "🚶"
+				} else {
+					loadingSymbol = "🏃"
+				}
+				fmt.Printf("\033[2K\r%s %s%s", loadingSymbol, loading, strings.Repeat(".", i%30))
 				i++
 			}
 		}
