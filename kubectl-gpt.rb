@@ -5,20 +5,20 @@
 class KubectlGpt < Formula
   desc "kubectl-gpt is a kubectl plugin to generate `kubectl` commands from natural language input by using OpenAI's GPT model."
   homepage "https://github.com/devinjeon/kubectl-gpt"
-  version "1.0.1"
+  version "1.0.2"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_darwin_arm64.tar.gz"
-      sha256 "8b804b21e95944c0cf08134f3898068634a1985850647884261be59a51f77909"
+      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.2/kubectl-gpt_v1.0.2_darwin_arm64.tar.gz"
+      sha256 "4b9f2202d587e4b540d9d8ea966026b26268f2517d1ac66880b537229d65abad"
 
       def install
         bin.install "kubectl-gpt"
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_darwin_x86_64.tar.gz"
-      sha256 "81aea275ed36cf3d1c41e0ece32757ef892b7303c6f19623adfede7b4db0aa36"
+      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.2/kubectl-gpt_v1.0.2_darwin_x86_64.tar.gz"
+      sha256 "a3170fa4402dbda6bf0b5fedd067eae38508cf13dce226fad6877c1e19302cce"
 
       def install
         bin.install "kubectl-gpt"
@@ -27,17 +27,17 @@ class KubectlGpt < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_linux_arm64.tar.gz"
-      sha256 "6fe01803fe9e03d3a01f51b26f04ab73fb9ab30adaf5654af291ff97bba16355"
+    if Hardware::CPU.intel?
+      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.2/kubectl-gpt_v1.0.2_linux_x86_64.tar.gz"
+      sha256 "205ffe6f99389b2d7e8bf34f44006d6c98e0c0048e18b5a674583f7521f92b41"
 
       def install
         bin.install "kubectl-gpt"
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_linux_x86_64.tar.gz"
-      sha256 "c815d6f5210a5fd64b6451ab2aa2cefccd263c113580977596109c0c714a7010"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.2/kubectl-gpt_v1.0.2_linux_arm64.tar.gz"
+      sha256 "99233dcd7eb2b6a74e2d6522077e24ef092694b6c83964fca10a17c934f75c12"
 
       def install
         bin.install "kubectl-gpt"
