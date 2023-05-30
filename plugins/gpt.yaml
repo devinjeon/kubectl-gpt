@@ -3,46 +3,46 @@ kind: Plugin
 metadata:
   name: gpt
 spec:
-  version: v1.0.0
+  version: v1.0.1
   platforms:
     - bin: kubectl-gpt.exe
-      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_windows_x86_64.zip
-      sha256: aa6930527d24e6a3044a03d89a3b1921f0b55c0d3e31839650d38dc7d22eb221
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_windows_x86_64.zip
+      sha256: e9ca67cc4c9d63124f53b98409fa6fddfd1d7ec42faff67aecba0c0726c39114
       selector:
         matchLabels:
           os: windows
           arch: amd64
     - bin: kubectl-gpt.exe
-      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_windows_arm64.zip
-      sha256: edb21818be2368f34c055709bff3330bef86d93b349af460b17fc6d6470539f1
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_windows_arm64.zip
+      sha256: 2c15889bc14c6a306d923d8bc06dd8781bf7ade484f3b6c70cb69dfecb365b88
       selector:
         matchLabels:
           os: windows
           arch: arm64
     - bin: kubectl-gpt
-      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_linux_x86_64.tar.gz
-      sha256: dc5e31f655a71d469495b4d69f4c35a76b4c325b41af27c0fd325ead21d23e20
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_linux_x86_64.tar.gz
+      sha256: c815d6f5210a5fd64b6451ab2aa2cefccd263c113580977596109c0c714a7010
       selector:
         matchLabels:
           os: linux
           arch: amd64
     - bin: kubectl-gpt
-      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_linux_arm64.tar.gz
-      sha256: 83c56b09980d5c98ac346a7d2c091b647fc0e115710c6053011ee86e0916a7c5
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_linux_arm64.tar.gz
+      sha256: 6fe01803fe9e03d3a01f51b26f04ab73fb9ab30adaf5654af291ff97bba16355
       selector:
         matchLabels:
           os: linux
           arch: arm64
     - bin: kubectl-gpt
-      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_darwin_x86_64.tar.gz
-      sha256: da542a7ec6a3317a4eb926b42f4ab1aced97c286a1df8d62b696e13740e04f41
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_darwin_x86_64.tar.gz
+      sha256: 81aea275ed36cf3d1c41e0ece32757ef892b7303c6f19623adfede7b4db0aa36
       selector:
         matchLabels:
           os: darwin
           arch: amd64
     - bin: kubectl-gpt
-      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.0/kubectl-gpt_v1.0.0_darwin_arm64.tar.gz
-      sha256: 0a62a346f5128b5b89fd0438bdbaea6097febfe8dd1069b2b2f457bc2d157cdc
+      uri: https://github.com/devinjeon/kubectl-gpt/releases/download/v1.0.1/kubectl-gpt_v1.0.1_darwin_arm64.tar.gz
+      sha256: 8b804b21e95944c0cf08134f3898068634a1985850647884261be59a51f77909
       selector:
         matchLabels:
           os: darwin
