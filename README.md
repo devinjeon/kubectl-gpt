@@ -74,6 +74,7 @@ kubectl gpt "coredns deployment의 replica를 2로 증가"
 
 you can set the following environment variables for OpenAI API configurations:
 
+- `OPENAI_API_URL`: OpenAI API URL (default is https://api.openai.com/v1/chat/completions)
 - `OPENAI_MODEL`: The model to use for GPT-3 (default is `gpt-3.5-turbo`)
 - `OPENAI_TEMPERATURE`: Controls the randomness of GPT-3's output (default is `0.2`)
 - `OPENAI_MAX_TOKENS`: Maximum number of tokens for GPT-3 to generate (default is `300`)
