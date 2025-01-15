@@ -52,14 +52,15 @@ func NewOpenAIRequest(model string, temperature float64, maxTokens int, systemMe
 	}
 }
 
-func RequestChatGptAPI(reqBody OpenAIRequest, apiKey string) (OpenAIResponse, error) {
+func RequestChatGptAPI(apiUrl string, reqBody OpenAIRequest, apiKey string) (OpenAIResponse, error) {
 	client := &http.Client{}
 
 	jsonReqBody, err := json.Marshal(reqBody)
-	if err != nil { return OpenAIResponse{}, err
+	if err != nil {
+		return OpenAIResponse{}, err
 	}
 
-	req, err := http.NewRequest("POST", "https://api.openai.com/v1/chat/completions", strings.NewReader(string(jsonReqBody)))
+	req, err := http.NewRequest("POST", apiUrl, strings.NewReader(string(jsonReqBody)))
 	if err != nil {
 		return OpenAIResponse{}, err
 	}
