@@ -18,6 +18,7 @@ const (
 	DefaultMaxTokens   = 300
 	DefaultTemperature = 0.2
 	DefaultModel       = "gpt-3.5-turbo"
+	DefaultApiUrl      = "https://api.openai.com/v1/chat/completions"
 	systemMessage      = "Translate the given text to a kubectl command. Show only generated kubectl command without any description, code block."
 )
 
@@ -44,7 +45,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	apiKey, model, temperature, maxTokens := getOpenAIConfigFromEnv()
+	apiUrl, apiKey, model, temperature, maxTokens := getOpenAIConfigFromEnv()
 	if apiKey == "" {
 		fmt.Println("Please set the environment variable: \"OPENAI_API_KEY\".")
 		fmt.Println("You can add the following line to your .zshrc or .bashrc file:")
@@ -67,12 +68,12 @@ func main() {
 	wg.Add(1)
 	go printLoadingMessage(&wg)
 
-	response, err := gpt.RequestChatGptAPI(request, apiKey)
+	response, err := gpt.RequestChatGptAPI(apiUrl, request, apiKey)
 
 	wg.Done()
 	fmt.Printf("\033[2K\r") // Clear loading message after completion
 	if err != nil {
-		fmt.Printf("Failed to call OpenAI API: %v\n", err)
+		fmt.Printf("Failed to call OpenAI API at %s:\n%v\n", apiUrl, err)
 		os.Exit(1)
 	}
 
@@ -105,8 +106,13 @@ func main() {
 	}
 }
 
-// getEnvironmentVariables retrieves OpenAI related variables from environment
-func getOpenAIConfigFromEnv() (apiKey string, model string, temperature float64, maxTokens int) {
+// getOpenAIConfigFromEnv retrieves OpenAI related variables from environment
+func getOpenAIConfigFromEnv() (apiUrl, apiKey string, model string, temperature float64, maxTokens int) {
+	apiUrl = os.Getenv("OPENAI_API_URL")
+	if apiUrl == "" {
+		apiUrl = DefaultApiUrl
+	}
+
 	apiKey = os.Getenv("OPENAI_API_KEY")
 
 	model = os.Getenv("OPENAI_MODEL")
@@ -136,7 +142,7 @@ func getOpenAIConfigFromEnv() (apiKey string, model string, temperature float64,
 		}
 	}
 
-	return apiKey, model, temperature, maxTokens
+	return apiUrl, apiKey, model, temperature, maxTokens
 }
 
 func printLoadingMessage(wg *sync.WaitGroup) {
@@ -177,6 +183,7 @@ func printHelp() {
 	fmt.Println("  --version       Show the version")
 	fmt.Println()
 	fmt.Println("Environment variables:")
+	fmt.Println("  OPENAI_API_URL        OpenAI API URL (default is https://api.openai.com/v1/chat/completions)")
 	fmt.Println("  OPENAI_API_KEY        OpenAI API Key")
 	fmt.Println("  OPENAI_MODEL          OpenAI Model to use (default is gpt-3.5-turbo)")
 	fmt.Println("  OPENAI_TEMPERATURE    Temperature for the OpenAI request (default is 0.2)")
