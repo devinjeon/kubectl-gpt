@@ -71,13 +71,24 @@ func main() {
 	response, err := gpt.RequestChatGptAPI(apiUrl, request, apiKey)
 
 	wg.Done()
-	fmt.Printf("\033[2K\r") // Clear loading message after completion
+	fmt.Fprintf(os.Stderr, "\033[2K\r") // Clear loading message after completion
 	if err != nil {
 		fmt.Printf("Failed to call OpenAI API at %s:\n%v\n", apiUrl, err)
 		os.Exit(1)
 	}
 
 	kubectlCommand := extractCommand(response)
+
+	mode := os.Getenv("KUBECTL_GPT_MODE")
+	if mode == "prompt" {
+		// In prompt mode, output only the raw command to stdout.
+		// Use with a shell function that calls `print -z` to place it in the edit buffer.
+		fmt.Fprintln(os.Stderr, "\033[1;31m❗[WARNING] Please verify the generated commands before executing them on your k8s cluster,",
+			"especially `update` and `patch` commands, as GPT-generated commands may be inaccurate.\033[0m")
+		fmt.Print(kubectlCommand)
+		os.Exit(0)
+	}
+
 	fmt.Println("\033[1;31m❗[WARNING] Please verify the generated commands before executing them on your k8s cluster,",
 		"especially `update` and `patch` commands, as GPT-generated commands may be inaccurate.\033[0m")
 	fmt.Printf("\033[1;34m[Generated Command]\033[0m\n%s\n", kubectlCommand)
@@ -162,7 +173,7 @@ func printLoadingMessage(wg *sync.WaitGroup) {
 				} else {
 					loadingSymbol = "🏃"
 				}
-				fmt.Printf("\033[2K\r%s %s%s", loadingSymbol, loading, strings.Repeat(".", i%30))
+				fmt.Fprintf(os.Stderr, "\033[2K\r%s %s%s", loadingSymbol, loading, strings.Repeat(".", i%30))
 				i++
 			}
 		}
@@ -185,9 +196,10 @@ func printHelp() {
 	fmt.Println("Environment variables:")
 	fmt.Println("  OPENAI_API_URL        OpenAI API URL (default is https://api.openai.com/v1/chat/completions)")
 	fmt.Println("  OPENAI_API_KEY        OpenAI API Key")
-	fmt.Println("  OPENAI_MODEL          OpenAI Model to use (default is gpt-3.5-turbo)")
+	fmt.Println("  OPENAI_MODEL          OpenAI Model to use (default is gpt-5.4)")
 	fmt.Println("  OPENAI_TEMPERATURE    Temperature for the OpenAI request (default is 0.2)")
 	fmt.Println("  OPENAI_MAX_TOKENS     Max tokens for the OpenAI request (default is 300)")
+	fmt.Println("  KUBECTL_GPT_MODE      Output mode: 'execute' (default) or 'prompt' (outputs raw command for shell integration)")
 }
 
 func extractCommand(response gpt.OpenAIResponse) string {
