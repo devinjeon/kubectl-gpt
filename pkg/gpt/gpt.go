@@ -3,7 +3,7 @@ package gpt
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 )
@@ -16,7 +16,7 @@ type Message struct {
 type OpenAIRequest struct {
 	Model       string    `json:"model"`
 	Temperature float64   `json:"temperature"`
-	MaxTokens   int       `json:"max_tokens"`
+	MaxTokens   int       `json:"max_completion_tokens"`
 	Messages    []Message `json:"messages"`
 }
 
@@ -76,12 +76,12 @@ func RequestChatGptAPI(apiUrl string, reqBody OpenAIRequest, apiKey string) (Ope
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		bodyBytes, _ := ioutil.ReadAll(resp.Body)
+		bodyBytes, _ := io.ReadAll(resp.Body)
 		bodyString := string(bodyBytes)
 		return OpenAIResponse{}, fmt.Errorf("received status code %d, body: %s", resp.StatusCode, bodyString)
 	}
 
-	respBody, err := ioutil.ReadAll(resp.Body)
+	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return OpenAIResponse{}, err
 	}

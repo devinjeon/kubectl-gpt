@@ -17,7 +17,7 @@ import (
 const (
 	DefaultMaxTokens   = 300
 	DefaultTemperature = 0.2
-	DefaultModel       = "gpt-3.5-turbo"
+	DefaultModel       = "gpt-5.4"
 	DefaultApiUrl      = "https://api.openai.com/v1/chat/completions"
 	systemMessage      = "Translate the given text to a kubectl command. Show only generated kubectl command without any description, code block."
 )
@@ -51,7 +51,7 @@ func main() {
 		fmt.Println("You can add the following line to your .zshrc or .bashrc file:")
 		fmt.Println("export OPENAI_API_KEY=<your-key>")
 		fmt.Println()
-		fmt.Println("If you don't have an OpenAI API Key, you can get one at this link: https://platform.openai.com/account/api-keys.")
+		fmt.Println("If you don't have an OpenAI API Key, you can get one at this link: https://platform.openai.com/api-keys.")
 		os.Exit(1)
 	}
 
